@@ -1,0 +1,8 @@
+# User-specific files
+.vs/
+*.suo
+*.user
+
+# Dependencies
+**/[Bb]in/
+**/[Oo]bj/
