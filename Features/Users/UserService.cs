@@ -39,7 +39,7 @@
         public async Task<UserDto?> UpdateUserAsync(int id, UpdateUserDto userDto)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) return null; // Devuelve null si no se encuentra
+            if (user == null) return null; 
 
             user.Name = userDto.Name;
             user.Email = userDto.Email;
@@ -51,7 +51,6 @@
 
             var updatedUser = await _userRepository.UpdateUserAsync(user);
 
-            // Devuelve el DTO del usuario actualizado
             return new UserDto
             {
                 Id = updatedUser.Id,
@@ -66,10 +65,10 @@
             return await _userRepository.DeleteUserAsync(id);
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync(int? pageNumber, int? pageSize)
+
         {
-            var users = await _userRepository.GetAllUsersAsync();
-            // Convertimos la lista de User a una lista de UserDto
+            var users = await _userRepository.GetAllUsersAsync(pageNumber, pageSize);
             return users.Select(u => new UserDto
             {
                 Id = u.Id,

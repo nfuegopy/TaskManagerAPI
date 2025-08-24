@@ -2,7 +2,7 @@
 {
     public interface ITaskService
     {
-        Task<IEnumerable<TaskDto>> GetTasksByUserIdAsync(int userId);
+        Task<IEnumerable<TaskDto>> GetTasksByUserIdAsync(int userId, int? pageNumber, int? pageSize);
         Task<TaskDto?> GetTaskByIdAndUserIdAsync(int id, int userId);
         Task<TaskDto> CreateTaskAsync(CreateTaskDto taskDto, int userId);
         Task<TaskDto?> UpdateTaskAsync(int id, UpdateTaskDto taskDto, int userId);

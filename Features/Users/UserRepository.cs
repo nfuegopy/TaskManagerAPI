@@ -29,9 +29,16 @@ namespace TaskManagerAPI.Features.Users
             return true;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync(int? pageNumber, int? pageSize)
         {
-            return await _context.Users.ToListAsync();
+            var query = _context.Users.OrderBy(u => u.Id).AsQueryable();
+
+            if (pageNumber.HasValue && pageSize.HasValue)
+            {
+                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<User?> GetUserByIdAsync(int id)
