@@ -26,7 +26,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-// 4. --- ESTE ES EL BLOQUE DE CONFIGURACIÓN DE JWT QUE FALTABA ---
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,7 +56,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Introduce 'Bearer' [espacio] y después tu token en el campo de texto.\n\nEjemplo: \"Bearer 12345abcdef\""
+        Description = "Introduce 'Bearer' [espacio] y despuÃ©s tu token en el campo de texto.\n\nEjemplo: \"Bearer 12345abcdef\""
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
