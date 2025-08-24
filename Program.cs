@@ -6,6 +6,7 @@ using TaskManagerAPI.Data;
 using TaskManagerAPI.Features.Auth;
 using TaskManagerAPI.Features.Tasks;
 using TaskManagerAPI.Features.Users;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +42,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
+
+
 
 
 var app = builder.Build();
