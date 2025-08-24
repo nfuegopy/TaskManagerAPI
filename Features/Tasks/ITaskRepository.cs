@@ -2,7 +2,8 @@
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<Task>> GetTasksByUserIdAsync(int userId);
+        Task<IEnumerable<Task>> GetTasksByUserIdAsync(int userId, int? pageNumber, int? pageSize);
+
         Task<Task?> GetTaskByIdAsync(int id);
         Task<Task> CreateTaskAsync(Task task);
         Task<Task> UpdateTaskAsync(Task task);

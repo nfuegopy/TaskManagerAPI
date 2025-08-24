@@ -24,13 +24,12 @@ namespace TaskManagerAPI.Features.Tasks
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskDto>>> GetAllTasks()
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetAllTasks([FromQuery] int? pageNumber, [FromQuery] int? pageSize)
         {
             var userId = GetUserIdFromToken();
-            var tasks = await _taskService.GetTasksByUserIdAsync(userId);
+            var tasks = await _taskService.GetTasksByUserIdAsync(userId, pageNumber, pageSize);
             return Ok(tasks);
         }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskDto>> GetTaskById(int id)
         {

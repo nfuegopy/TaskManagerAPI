@@ -70,9 +70,11 @@ namespace TaskManagerAPI.Features.Tasks
             };
         }
 
-        public async Task<IEnumerable<TaskDto>> GetTasksByUserIdAsync(int userId)
+        public async Task<IEnumerable<TaskDto>> GetTasksByUserIdAsync(int userId, int? pageNumber, int? pageSize)
+
         {
-            var tasks = await _taskRepository.GetTasksByUserIdAsync(userId);
+            var tasks = await _taskRepository.GetTasksByUserIdAsync(userId, pageNumber, pageSize);
+
             return tasks.Select(task => new TaskDto
             {
                 Id = task.Id,

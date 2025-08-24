@@ -38,11 +38,19 @@ namespace TaskManagerAPI.Features.Tasks
             return await _context.Tasks.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Task>> GetTasksByUserIdAsync(int userId)
+        public async Task<IEnumerable<Task>> GetTasksByUserIdAsync(int userId, int? pageNumber, int? pageSize)
         {
-            return await _context.Tasks
+            var query = _context.Tasks
                 .Where(t => t.UserId == userId)
-                .ToListAsync();
+                .OrderByDescending(t => t.CreatedAt)
+                .AsQueryable();
+
+            if (pageNumber.HasValue && pageSize.HasValue)
+            {
+                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<Task> UpdateTaskAsync(Task task)
