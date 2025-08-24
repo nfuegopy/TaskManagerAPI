@@ -13,6 +13,11 @@ namespace TaskManagerAPI.Features.Auth
             _authService = authService;
         }
 
+        /// <summary>
+        /// Registra un nuevo usuario en el sistema.
+        /// </summary>
+        /// <param name="model">Datos del nuevo usuario (Nombre, Email, Contraseña).</param>
+        /// <returns>Los datos del usuario recién creado.</returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest model)
         {
@@ -20,6 +25,11 @@ namespace TaskManagerAPI.Features.Auth
             return Ok(result);
         }
 
+        /// <summary>
+        /// Autentica a un usuario y devuelve un token JWT.
+        /// </summary>
+        /// <param name="model">Credenciales del usuario (Email, Contraseña).</param>
+        /// <returns>Un token JWT si las credenciales son correctas.</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest model)
         {
